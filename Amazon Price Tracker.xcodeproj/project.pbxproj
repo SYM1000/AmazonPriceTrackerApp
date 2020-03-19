@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,11 @@
 		E64F42FF241F08BC002EC940 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E64F42FE241F08BC002EC940 /* Assets.xcassets */; };
 		E64F4302241F08BC002EC940 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E64F4301241F08BC002EC940 /* Preview Assets.xcassets */; };
 		E64F4305241F08BC002EC940 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E64F4303241F08BC002EC940 /* LaunchScreen.storyboard */; };
+		E64F430D242012E6002EC940 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64F430C242012E6002EC940 /* SettingsView.swift */; };
+		E6F4EB182422F179003D3B7B /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F4EB172422F178003D3B7B /* AddProductView.swift */; };
+		E6F4EB1B2422F51D003D3B7B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = E6F4EB1A2422F51D003D3B7B /* SwiftyJSON */; };
+		E6F4EB1E2422F58C003D3B7B /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E6F4EB1D2422F58C003D3B7B /* SDWebImageSwiftUI */; };
+		E6F4EB2224232D24003D3B7B /* ProductRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F4EB2124232D24003D3B7B /* ProductRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +31,9 @@
 		E64F4301241F08BC002EC940 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E64F4304241F08BC002EC940 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E64F4306241F08BC002EC940 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E64F430C242012E6002EC940 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		E6F4EB172422F178003D3B7B /* AddProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductView.swift; sourceTree = "<group>"; };
+		E6F4EB2124232D24003D3B7B /* ProductRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductRow.swift; path = ../ProductRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6F4EB1E2422F58C003D3B7B /* SDWebImageSwiftUI in Frameworks */,
+				E6F4EB1B2422F51D003D3B7B /* SwiftyJSON in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +71,9 @@
 				E64F42F5241F08B8002EC940 /* AppDelegate.swift */,
 				E64F42F7241F08B8002EC940 /* SceneDelegate.swift */,
 				E64F42FC241F08B8002EC940 /* ContentView.swift */,
+				E6F4EB172422F178003D3B7B /* AddProductView.swift */,
+				E6F4EB2124232D24003D3B7B /* ProductRow.swift */,
+				E64F430C242012E6002EC940 /* SettingsView.swift */,
 				E64F42FE241F08BC002EC940 /* Assets.xcassets */,
 				E64F4303241F08BC002EC940 /* LaunchScreen.storyboard */,
 				E64F4306241F08BC002EC940 /* Info.plist */,
@@ -94,6 +107,10 @@
 			dependencies = (
 			);
 			name = "Amazon Price Tracker";
+			packageProductDependencies = (
+				E6F4EB1A2422F51D003D3B7B /* SwiftyJSON */,
+				E6F4EB1D2422F58C003D3B7B /* SDWebImageSwiftUI */,
+			);
 			productName = "Amazon Price Tracker";
 			productReference = E64F42F2241F08B8002EC940 /* Amazon Price Tracker.app */;
 			productType = "com.apple.product-type.application";
@@ -122,6 +139,10 @@
 				Base,
 			);
 			mainGroup = E64F42E9241F08B8002EC940;
+			packageReferences = (
+				E6F4EB192422F51D003D3B7B /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				E6F4EB1C2422F58C003D3B7B /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			productRefGroup = E64F42F3241F08B8002EC940 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -149,8 +170,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E64F430D242012E6002EC940 /* SettingsView.swift in Sources */,
 				E64F42FB241F08B8002EC940 /* Amazon_Price_Tracker.xcdatamodeld in Sources */,
+				E6F4EB182422F179003D3B7B /* AddProductView.swift in Sources */,
 				E64F42F6241F08B8002EC940 /* AppDelegate.swift in Sources */,
+				E6F4EB2224232D24003D3B7B /* ProductRow.swift in Sources */,
 				E64F42FD241F08B8002EC940 /* ContentView.swift in Sources */,
 				E64F42F8241F08B8002EC940 /* SceneDelegate.swift in Sources */,
 			);
@@ -300,7 +324,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Santiago-Yeomans.Amazon-Price-Tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -320,7 +344,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Santiago-Yeomans.Amazon-Price-Tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -346,6 +370,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E6F4EB192422F51D003D3B7B /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		E6F4EB1C2422F58C003D3B7B /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E6F4EB1A2422F51D003D3B7B /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E6F4EB192422F51D003D3B7B /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		E6F4EB1D2422F58C003D3B7B /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E6F4EB1C2422F58C003D3B7B /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E64F42F9241F08B8002EC940 /* Amazon_Price_Tracker.xcdatamodeld */ = {
