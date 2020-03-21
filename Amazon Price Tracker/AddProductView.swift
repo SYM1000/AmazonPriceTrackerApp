@@ -60,8 +60,9 @@ struct AddProductView: View {
                 //Boton para añadir
               Button(action: {
   //                Request al API
-                if(self.link != ""){ //Añadir metodo para validar el link
+                if(verificarUrl(urlString: self.link)){ //Añadir metodo para validar el link
                     
+                    //print(GetApiRequest(link: self.link)) ------> Para verificar el link que regresa
                     getData(link: self.link, cantidad: self.cantidad){ (output) in
                         //output
                         self.products.AddProduct(producto: output)
@@ -91,10 +92,11 @@ struct AddProductView: View {
             Spacer()
         }
         .alert(isPresented: $showingAlert) {
-            Alert(title: Text("Error"), message: Text("Agregar un link válido"), dismissButton: .default(Text("Entendido")))
+            Alert(title: Text("Error con URL"), message: Text("Agregar un link válido"), dismissButton: .default(Text("De acuerdo")))
     }
  }
 }
+
 //struct AddProductView_Previews: PreviewProvider {
 //    static let products = ProductsStore()
 //    static var previews: some View {
@@ -106,35 +108,20 @@ struct AddProductView: View {
 
 func getData(link: String, cantidad: Int, completionBlock: @escaping (Product) -> Void) -> Void{
         
-    //var final : Product
-        //final = Product(id: "", name: "Nombre del Producto", brand: "Amazon", desc: "", currency: "", priceInt: 0, priceString: "$0.0", imgurl: "", url: "", GoalPrice: 0)
-    
-//        var id = ""
-//        var name = "Producto Nombre"
-//        var brand = "Amazon"
-//        var desc = ""
-//        var currency = ""
-//        var priceInt = 0
-//        var priceRaw = "$1,234.56"
-//        var imgurl = ""
-//        var urlP = ""
-        
         print("getting data")
-        
-        let api = "https://api.rainforestapi.com/request?api_key=demo&type=product&url=https%3A%2F%2F"
     
-        //let producto = link.replacingOccurrences(of: "/", with: "%")
-        let producto_final = link.replacingOccurrences(of: "https://", with: "")
+    //https://api.rainforestapi.com/request?api_key=demo&type=product&url=https%3A%2F%2Fwww.amazon.com.mx%2FSAMSUNG-Monitor-1920x1080-Flicker-LS24R350FHLXZX%2Fdp%2FB07Z8PW58J%2Fref%3Dsr_1_1%3F__mk_es_MX%3D%25C3%2585M%25C3%2585%25C5%25BD%25C3%2595%25C3%2591%26keywords%3Dmonitor%26qid%3D1584387122%26sr%3D8-1
         
-        //URL para realizar la busqueda del producto
-        let url = api + producto_final
-        //print("url del producto: " + url)
-
+        
+        let url = GetApiRequest(link: link)
+        print(url)
+        //var url = link //Solo para pruebas USANDO api_key: DEMOS
+    
         let session = URLSession(configuration: .default)
-        
-        session.dataTask(with: URL(string : url)! ) { (data, response, err) in
+        session.dataTask(with: URL(string : url)! ) { (data, response, err) in //cambiar pruba por "url"
             
             if err != nil{
+                print("Ocurrió un error:")
                 print((err?.localizedDescription)!)
                 return
             }
@@ -193,7 +180,43 @@ func getData(link: String, cantidad: Int, completionBlock: @escaping (Product) -
    //return final
 }
 
+func verificarUrl (urlString: String?) -> Bool {
+    if let urlString = urlString {
+        if let url = NSURL(string: urlString) {
+            return UIApplication.shared.canOpenURL(url as URL)
+        }
+    }
+    return false
+}
+
+func GetApiRequest(link : String ) -> String{
+    
+    
+    let encodedString = link.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+    let api_result = ApiParams.linkBase + "api_key=" + ApiParams.api_key + "&type=" + ApiParams.type + "&url=" + encodedString
+    //let typeUrl = URL(string: api_result)!
+//    if let encodedString  = string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed), let url = URL(string: encodedString) {
+//        print(url) // www.mydomain.com%2Fkey=%E0%A4%85%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%AF
+//    }
+    
+    return api_result
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 //let url = "https://api.rainforestapi.com/request?api_key=demo&type=product&url=https%3A%2F%2Fwww.amazon.com.mx%2FSAMSUNG-Monitor-1920x1080-Flicker-LS24R350FHLXZX%2Fdp%2FB07Z8PW58J%2Fref%3Dsr_1_1%3F__mk_es_MX%3D%25C3%2585M%25C3%2585%25C5%25BD%25C3%2595%25C3%2591%26keywords%3Dmonitor%26qid%3D1584387122%26sr%3D8-1"
+
+//Link de pruba: https://api.rainforestapi.com/request?api_key=F11BA09B9AFB4CCDB3FE6E902C0A7CA1&type=product&url=https%3A%2F%2Fwww.amazon.com.mx%2FNintendo-Consola-Switch-Neon-Version%2Fdp%2FB07VGRJDFY%3Fpf_rd_r%3DSD4SHKF9E08KBW248T2D%26pf_rd_p%3Dfe4a2b07-f748-5800-b3bd-5f04ddb6b36f%26pd_rd_r%3D1e9a0d0d-c99f-46de-aaa6-bf3638394220%26pd_rd_w%3D5xKfo%26pd_rd_wg%3D8yoUt%26ref_%3Dpd_gw_ri
 
 //Link de pruebas
 //www.amazon.com.mx%2FFunko-Pop-Movies-Black-Buddy%2Fdp%2FB07WTQH232%3Fpf_rd_r%3DW1G2G930GH2N40E2GZSE%26pf_rd_p%3D9bf98ec6-3e20-46ba-bf2c-1893c7bd4635%26pd_rd_r%3D0cfeacec-2db7-4ead-9495-c8650aacdcfd%26pd_rd_w%3DxWmOZ%26pd_rd_wg%3Dt4NgH%26ref_%3Dpd_gw_bia_d0

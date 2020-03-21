@@ -38,9 +38,13 @@ class ProductsStore : ObservableObject {
         ProductsList.removeAll()
     }
     
-    func DeleteProduct() {
-           //Eliminar un elemento del arreglo
-       }
+    func DeleteProduct(at indexSet: IndexSet) {
+        //Eliminar un elemento del arreglo
+        ProductsList.remove(atOffsets: indexSet)
+    }
+    
+    
+    
     
 }
 
