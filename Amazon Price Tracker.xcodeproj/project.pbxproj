@@ -16,6 +16,7 @@
 		E64F4305241F08BC002EC940 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E64F4303241F08BC002EC940 /* LaunchScreen.storyboard */; };
 		E64F430D242012E6002EC940 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64F430C242012E6002EC940 /* SettingsView.swift */; };
 		E676DFD424234C730021101A /* ProductsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676DFD324234C730021101A /* ProductsStore.swift */; };
+		E67A9FB02424581A005F33C4 /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = E67A9FAF2424581A005F33C4 /* SPAlert */; };
 		E6F4EB182422F179003D3B7B /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F4EB172422F178003D3B7B /* AddProductView.swift */; };
 		E6F4EB1B2422F51D003D3B7B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = E6F4EB1A2422F51D003D3B7B /* SwiftyJSON */; };
 		E6F4EB1E2422F58C003D3B7B /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E6F4EB1D2422F58C003D3B7B /* SDWebImageSwiftUI */; };
@@ -43,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E67A9FB02424581A005F33C4 /* SPAlert in Frameworks */,
 				E6F4EB1E2422F58C003D3B7B /* SDWebImageSwiftUI in Frameworks */,
 				E6F4EB1B2422F51D003D3B7B /* SwiftyJSON in Frameworks */,
 			);
@@ -73,8 +75,8 @@
 				E64F42F5241F08B8002EC940 /* AppDelegate.swift */,
 				E64F42F7241F08B8002EC940 /* SceneDelegate.swift */,
 				E64F42FC241F08B8002EC940 /* ContentView.swift */,
-				E676DFD324234C730021101A /* ProductsStore.swift */,
 				E6F4EB172422F178003D3B7B /* AddProductView.swift */,
+				E676DFD324234C730021101A /* ProductsStore.swift */,
 				E6F4EB2124232D24003D3B7B /* ProductRow.swift */,
 				E64F430C242012E6002EC940 /* SettingsView.swift */,
 				E64F42FE241F08BC002EC940 /* Assets.xcassets */,
@@ -113,6 +115,7 @@
 			packageProductDependencies = (
 				E6F4EB1A2422F51D003D3B7B /* SwiftyJSON */,
 				E6F4EB1D2422F58C003D3B7B /* SDWebImageSwiftUI */,
+				E67A9FAF2424581A005F33C4 /* SPAlert */,
 			);
 			productName = "Amazon Price Tracker";
 			productReference = E64F42F2241F08B8002EC940 /* Amazon Price Tracker.app */;
@@ -145,6 +148,7 @@
 			packageReferences = (
 				E6F4EB192422F51D003D3B7B /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				E6F4EB1C2422F58C003D3B7B /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				E67A9FAE2424581A005F33C4 /* XCRemoteSwiftPackageReference "SPAlert" */,
 			);
 			productRefGroup = E64F42F3241F08B8002EC940 /* Products */;
 			projectDirPath = "";
@@ -376,6 +380,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E67A9FAE2424581A005F33C4 /* XCRemoteSwiftPackageReference "SPAlert" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ivanvorobei/SPAlert.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.4;
+			};
+		};
 		E6F4EB192422F51D003D3B7B /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
@@ -395,6 +407,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E67A9FAF2424581A005F33C4 /* SPAlert */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E67A9FAE2424581A005F33C4 /* XCRemoteSwiftPackageReference "SPAlert" */;
+			productName = SPAlert;
+		};
 		E6F4EB1A2422F51D003D3B7B /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E6F4EB192422F51D003D3B7B /* XCRemoteSwiftPackageReference "SwiftyJSON" */;

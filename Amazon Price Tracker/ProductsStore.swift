@@ -16,7 +16,7 @@ struct Product : Identifiable{
     var brand : String
     var desc : String
     var currency : String
-    var priceInt : Int
+    var priceFloat : Float
     var priceString : String
     var imgurl : String
     var url : String

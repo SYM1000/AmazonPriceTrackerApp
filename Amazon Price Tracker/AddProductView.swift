@@ -9,43 +9,49 @@
 import SwiftUI
 import SwiftyJSON
 import SDWebImageSwiftUI
+import SPAlert
 
 struct AddProductView: View {
     @EnvironmentObject var products: ProductsStore
     @State var link : String = ""
-    //var productoNuevo : Product
+    @State var cantidad : Int
+    @Binding var isPresented: Bool
     
     var body: some View {
         
         VStack {
             //Agregar una imagende fondo
-        VStack(){
-            Image(systemName: "chevron.compact.down") //Indicador. Proximamente: Será un boton para bajar la vista
+        VStack{
+            Button(action: {
+                self.isPresented = false
+            }) {
+                Image(systemName: "chevron.compact.down") //Indicador. Proximamente: Será un boton para bajar la vista
                 .font(.largeTitle)
                 .foregroundColor(Color.secondary)
-            
+                .padding(.top, 10)
+            } //Boton indicador de flecha hacia abajo
+
             Text("Añadir un Producto")
-            .font(.largeTitle)
-            .fontWeight(.bold)
+                .font(.largeTitle)
+                .fontWeight(.bold)
             }
 
         Spacer()
           VStack {
               VStack(alignment: .leading){
-                  Text("Dirección del Producto")
+                    Text("Dirección del Producto")
                       .font(.headline)
                       
-                  TextField(" Pega la direccion aquí", text: $link)
-                      .cornerRadius(0)
-.textFieldStyle(RoundedBorderTextFieldStyle())
+                    TextField(" Pega la direccion aquí", text: $link)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                     
-                Text("Precio objetivo")
-                      .font(.headline)
+                    Text("Precio objetivo")
+                    .font(.headline)
                     .padding(.top, 10)
                       
-                  TextField(" Ingresa la cantidad", text: $link)
+                    TextField(" Ingresa la cantidad", text: $link) //cantidad
                     .keyboardType(.numberPad)
-                      .cornerRadius(0)
+                    .cornerRadius(0)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                   
               }.padding()
@@ -53,12 +59,16 @@ struct AddProductView: View {
                 //Boton para añadir
               Button(action: {
   //                Request al API
-                if(self.link != ""){
-                    getData(link: self.link){ (output) in
+                if(self.link != ""){ //Añadir metodo para validar el link
+                    
+                    getData(link: self.link, cantidad: self.cantidad){ (output) in
                         //output
                         self.products.AddProduct(producto: output)
                     }
                     print("se ha añadido a la lista")
+                    SPAlert.present(title: "Producto agregado", preset: .done)
+                    //Agregar un sleep
+                    self.isPresented = false
                     
                 }else{
                     //Saltar alert
@@ -69,40 +79,41 @@ struct AddProductView: View {
               }) {
                   Text("Añadir Producto").fontWeight(.bold)
                   .padding()
-              }   .background(Color.yellow)
-                  .foregroundColor(Color.white)
-                  .cornerRadius(20)
                 
-
+              }
+              .background(Color.yellow)
+              .foregroundColor(Color.white)
+              .cornerRadius(20)
+                
           }
             Spacer()
         }
     }
 }
 
-struct AddProductView_Previews: PreviewProvider {
-    static let products = ProductsStore()
-    static var previews: some View {
-        AddProductView().environmentObject(products)
-    }
-}
+//struct AddProductView_Previews: PreviewProvider {
+//    static let products = ProductsStore()
+//    static var previews: some View {
+//        AddProductView().environmentObject(products)
+//    }
+//}
 
 
 
-func getData(link: String, completionBlock: @escaping (Product) -> Void) -> Void{
+func getData(link: String, cantidad: Int, completionBlock: @escaping (Product) -> Void) -> Void{
         
     //var final : Product
         //final = Product(id: "", name: "Nombre del Producto", brand: "Amazon", desc: "", currency: "", priceInt: 0, priceString: "$0.0", imgurl: "", url: "", GoalPrice: 0)
     
-        var id = ""
-        var name = "Producto Nombre"
-        var brand = "Amazon"
-        var desc = ""
-        var currency = ""
-        var priceInt = 0
-        var priceRaw = "$1,234.56"
-        var imgurl = ""
-        var urlP = ""
+//        var id = ""
+//        var name = "Producto Nombre"
+//        var brand = "Amazon"
+//        var desc = ""
+//        var currency = ""
+//        var priceInt = 0
+//        var priceRaw = "$1,234.56"
+//        var imgurl = ""
+//        var urlP = ""
         
         print("getting data")
         
@@ -126,6 +137,15 @@ func getData(link: String, completionBlock: @escaping (Product) -> Void) -> Void
             
             let json = try! JSON(data: data!)
             
+            var id = ""
+            var name = "Producto Nombre"
+            var brand = "Amazon"
+            var desc = ""
+            var currency = ""
+            var priceFloat : Float
+            var priceRaw = "$1,234.56"
+            var imgurl = ""
+            var urlP = ""
             
             //Data for the product
             id = json["request_metadata"]["id"].stringValue
@@ -133,7 +153,7 @@ func getData(link: String, completionBlock: @escaping (Product) -> Void) -> Void
             brand = json["product"]["sub_title"]["text"].stringValue
             desc = ""
             currency = json["product"]["buybox_winner"]["price"]["currency"].stringValue
-            priceInt = json["product"]["buybox_winner"]["price"]["value"].intValue
+            priceFloat = json["product"]["buybox_winner"]["price"]["value"].floatValue
             priceRaw = json["product"]["buybox_winner"]["price"]["raw"].stringValue
             imgurl = json["product"]["main_image"]["link"].stringValue
             urlP = json[["product"]]["link"].stringValue
@@ -145,12 +165,18 @@ func getData(link: String, completionBlock: @escaping (Product) -> Void) -> Void
             print("Descripción: " + desc )
             print("Precion en string: " + priceRaw)
             print("Moneda: " + currency)
-            print("Precio en entero: ", priceInt)
+            print("Precio en entero: ", priceFloat)
             print("Imagen: " + imgurl)
             print("URL: " + url)
             
             //Falta añadir el precio objetivo
-            let final = Product(id: id, name: name, brand: brand, desc: desc, currency: currency, priceInt: priceInt, priceString: priceRaw, imgurl: imgurl, url: urlP, GoalPrice: 123)
+            var final = Product(id: UUID().uuidString, name: "Producto", brand: "Amazon", desc: desc, currency: "", priceFloat: 0.0, priceString: "$0.0", imgurl: imgurl, url: urlP, GoalPrice: 0)
+            
+            if(name != ""){
+                
+                final = Product(id: id, name: name, brand: brand, desc: desc, currency: currency, priceFloat: priceFloat, priceString: priceRaw, imgurl: imgurl, url: urlP, GoalPrice: cantidad)
+            }
+            
             
             completionBlock(final) //Regresar el objeto creado del producto
  
