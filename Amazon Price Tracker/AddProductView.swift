@@ -16,6 +16,7 @@ struct AddProductView: View {
     @State var link : String = ""
     @State var cantidad : Int
     @Binding var isPresented: Bool
+    @State private var showingAlert = false
     
     var body: some View {
         
@@ -50,7 +51,7 @@ struct AddProductView: View {
                     .padding(.top, 10)
                       
                     TextField(" Ingresa la cantidad", text: $link) //cantidad
-                    .keyboardType(.numberPad)
+                    //.keyboardType(.numberPad)
                     .cornerRadius(0)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                   
@@ -72,6 +73,7 @@ struct AddProductView: View {
                     
                 }else{
                     //Saltar alert
+                    self.showingAlert = true
                 }
                   
                   
@@ -88,9 +90,11 @@ struct AddProductView: View {
           }
             Spacer()
         }
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text("Error"), message: Text("Agregar un link válido"), dismissButton: .default(Text("Entendido")))
     }
+ }
 }
-
 //struct AddProductView_Previews: PreviewProvider {
 //    static let products = ProductsStore()
 //    static var previews: some View {

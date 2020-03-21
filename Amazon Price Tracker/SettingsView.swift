@@ -13,6 +13,7 @@ struct SettingsView: View {
     @State private var enableNotifications = false
     @State private var prueba = ""
     
+    
     @State private var icon = ""
     
     var body: some View {
@@ -50,13 +51,24 @@ struct SettingsView: View {
                 
                 //Seccion Soporte
                 Section(header: Text("Soporte").font(.title) ) {
-                    HStack {
-                        Text("Name")
-                        Spacer()
-                        Text("iPhone 11")
-                    }
+                    
+                        Button(action: {
+                            
+                        }) {
+                            Text("Button")
+                        }
+
+                        Text("Contactar con Soporte") //enviar email al dar click
+                        Text("Valorar esta app") //Enviar al app store a valorar app
+                        Text("Compartir") //Saltar opciones para compartir app
                 
                 }
+                
+               
+                
+               
+                
+                
             
             }
             

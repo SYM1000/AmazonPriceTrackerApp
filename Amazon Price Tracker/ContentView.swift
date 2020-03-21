@@ -110,6 +110,8 @@ struct CustomTab :View{
     }
 }
 
+
+
 //Where al productos are displayed(main view)
 struct Home : View {
     
