@@ -13,6 +13,7 @@ import SPAlert
 
 struct AddProductView: View {
     @EnvironmentObject var products: ProductsStore
+   // @Environment(\.managedObjectContext) var context //Para uso de coredata
     @State var link : String = ""
     @State var cantidad : Int
     @Binding var isPresented: Bool
@@ -65,7 +66,9 @@ struct AddProductView: View {
                     //print(GetApiRequest(link: self.link)) ------> Para verificar el link que regresa
                     getData(link: self.link, cantidad: self.cantidad){ (output) in
                         //output
-                        self.products.AddProduct(producto: output)
+                        
+                        self.products.AddProduct(producto: output) //Añadir el producto a la lista de productos usando la manera vieja
+//                        self.addProducto(productoAgregado: output) //Añadir el producto usando Core Data
                     }
                     print("se ha añadido a la lista")
                     SPAlert.present(title: "Producto agregado", preset: .done)
@@ -95,6 +98,37 @@ struct AddProductView: View {
             Alert(title: Text("Error con URL"), message: Text("Agregar un link válido"), dismissButton: .default(Text("De acuerdo")))
     }
  }
+    
+    //Funcion
+    //Funcion para añadir el producto a la lista de productos usando core data
+    
+//    func addProducto(productoAgregado : Product){
+//
+//        let newProducto = Producto(context: context)
+//        newProducto.id = productoAgregado.id
+//        newProducto.name = productoAgregado.name
+//        newProducto.brand = productoAgregado.brand
+//        newProducto.desc = productoAgregado.desc
+//        newProducto.currency = productoAgregado.currency
+//        newProducto.priceFloat = productoAgregado.priceFloat
+//        newProducto.priceString = productoAgregado.priceString
+//        newProducto.imgUrl = productoAgregado.imgurl
+//        newProducto.url = productoAgregado.url
+//        //newProducto.goalPrice = Int16(productoAgregado.GoalPrice!)
+//        newProducto.goalPrice = 6969
+//        newProducto.dateAdded = Date()
+//
+//
+//        do {
+//            try context.save()
+//        } catch {
+//            print("Error al añadir el Producto usando CoreData")
+//            print(error)
+//        }
+//
+//    }
+
+    
 }
 
 //struct AddProductView_Previews: PreviewProvider {
@@ -201,12 +235,6 @@ func GetApiRequest(link : String ) -> String{
     
     return api_result
 }
-
-
-
-
-
-
 
 
 
